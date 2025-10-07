@@ -1,15 +1,19 @@
 #include <iostream>
-#include <stack>
+
 using namespace std;
 
-bool isBalanced(string exp) {
+bool Balanced(string exp) {
     stack<char> s;
-    for (char ch : exp) {
-        if (ch == '(' || ch == '{' || ch == '[') {
+
+    
+    for (int i = 0; i < exp.length(); i++) {
+        char ch = exp[i];  
+
+        if (ch == '(' || ch == '{' || ch == '[')
             s.push(ch);
-        } 
         else if (ch == ')' || ch == '}' || ch == ']') {
-            if (s.empty()) return false;  // No matching opening bracket
+            if (s.empty())
+                return false;
 
             char top = s.top();
             s.pop();
@@ -17,10 +21,10 @@ bool isBalanced(string exp) {
             if ((ch == ')' && top != '(') ||
                 (ch == '}' && top != '{') ||
                 (ch == ']' && top != '['))
-                return false;  // Mismatched pair
+                return false;
         }
     }
-    return s.empty(); // True only if all are matched
+    return s.empty();
 }
 
 int main() {
@@ -28,10 +32,10 @@ int main() {
     cout << "Enter an expression: ";
     cin >> expression;
 
-    if (isBalanced(expression))
-        cout << "Balanced Parentheses" << endl;
+    if (Balanced(expression))
+        cout << "Balanced Parentheses";
     else
-        cout << "Not Balanced" << endl;
+        cout << "Not Balanced";
 
     return 0;
 }
